@@ -6,32 +6,70 @@ import { LazyLoading, LazyLoadingDisabled } from "@aws-amplify/datastore";
 
 
 
-type EagerTodo = {
+type EagerToDo = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Todo, 'id'>;
+    identifier: ManagedIdentifier<ToDo, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly name: string;
-  readonly description?: string | null;
+  readonly title: string;
+  readonly description: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
 
-type LazyTodo = {
+type LazyToDo = {
   readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Todo, 'id'>;
+    identifier: ManagedIdentifier<ToDo, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly name: string;
-  readonly description?: string | null;
+  readonly title: string;
+  readonly description: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
 
-export declare type Todo = LazyLoading extends LazyLoadingDisabled ? EagerTodo : LazyTodo
+export declare type ToDo = LazyLoading extends LazyLoadingDisabled ? EagerToDo : LazyToDo
 
-export declare const Todo: (new (init: ModelInit<Todo>) => Todo) & {
-  copyOf(source: Todo, mutator: (draft: MutableModel<Todo>) => MutableModel<Todo> | void): Todo;
+export declare const ToDo: (new (init: ModelInit<ToDo>) => ToDo) & {
+  copyOf(source: ToDo, mutator: (draft: MutableModel<ToDo>) => MutableModel<ToDo> | void): ToDo;
+}
+
+type EagerPerson = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Person, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name: string;
+  readonly date_of_birth?: string | null;
+  readonly date_of_joining?: string | null;
+  readonly email: string;
+  readonly location: string;
+  readonly mobile?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyPerson = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Person, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name: string;
+  readonly date_of_birth?: string | null;
+  readonly date_of_joining?: string | null;
+  readonly email: string;
+  readonly location: string;
+  readonly mobile?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Person = LazyLoading extends LazyLoadingDisabled ? EagerPerson : LazyPerson
+
+export declare const Person: (new (init: ModelInit<Person>) => Person) & {
+  copyOf(source: Person, mutator: (draft: MutableModel<Person>) => MutableModel<Person> | void): Person;
 }
