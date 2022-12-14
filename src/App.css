@@ -1,18 +1,32 @@
 .App {
-  text-align: center;
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-main {
+.AppContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: #f6f6f6;
+  padding: 1.5rem;
+}
+
+.App__ToDoList {
+  text-align: left;
+}
+
+.App__ToDoItem button:first-child {
+  margin-right: 1rem;
+}
+
+.App__ToDoForm {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 1rem;
+  justify-content: flex-start;
+}
+
+.ToDoCreateForm,
+.ToDoUpdateForm {
+  background: #fff;
 }

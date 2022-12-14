@@ -1,45 +1,123 @@
-import './App.css';
 import { DataStore } from '@aws-amplify/datastore';
-import { Todo } from './models';
+import { useEffect, useState } from 'react';
+import './App.css';
+import { ToDo } from './models';
+import { NavBar, ToDoCreateForm, ToDoUpdateForm } from './ui-components';
 
 function App() {
-  async function addTodo() {
-    await DataStore.save(
-      new Todo({
-        name: 'Lorem ipsum dolor sit amet',
-        description: 'Lorem ipsum dolor sit amet',
+  const [toDoList, setToDoList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [toDoItemToUpdate, setToDoItemToUpdate] = useState('');
+
+  const createToDo = (title, description) => DataStore.save(new ToDo({ title, description }));
+
+  const fetchToDo = () => {
+    setLoading(true);
+    DataStore.query(ToDo)
+      .then((models) => {
+        setToDoList(JSON.parse(JSON.stringify(models)));
+        setLoading(false);
       })
+      .catch(() => {
+        // TODO: Handle fetch error.
+        setLoading(false);
+      });
+  };
+
+  const updateToDo = (title, description) => {
+    return DataStore.query(ToDo, toDoItemToUpdate).then((original) => {
+      const copy = ToDo.copyOf(original, (item) => {
+        item.title = title;
+        item.description = description;
+      });
+      return DataStore.save(copy);
+    });
+  };
+
+  const deleteToDo = (id) =>
+    DataStore.query(ToDo, id).then((modelToDelete) => {
+      DataStore.delete(modelToDelete);
+    });
+
+  const handleToDoEditClick = (id) => {
+    setToDoItemToUpdate(id);
+  };
+
+  const handleToDoDeleteClick = (id) => {
+    deleteToDo(id).then(() => {
+      fetchToDo();
+    });
+  };
+
+  const handleToDoFormSubmit = ({ title, description }) => {
+    createToDo(title, description).then(() => {
+      fetchToDo();
+    });
+  };
+
+  const handleToDoUpdateFormSubmit = ({ title, description }) => {
+    updateToDo(title, description).then(() => {
+      fetchToDo();
+    });
+  };
+
+  const renderToDoList = () => {
+    if (loading) {
+      return <p>Fetching your To Do list...</p>;
+    }
+
+    if (!toDoList?.length) {
+      return <p>Yay! You're all caught up.</p>;
+    }
+
+    return (
+      <>
+        <table className="App__ToDoList">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {toDoList.map((toDoItem) => (
+              <tr className="App__ToDoItem" key={toDoItem.id}>
+                <td>{toDoItem.title}</td>
+                <td>{toDoItem.description}</td>
+                <td>
+                  <button onClick={() => handleToDoEditClick(toDoItem.id)}>Edit</button>
+                  <button onClick={() => handleToDoDeleteClick(toDoItem.id)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </>
     );
-  }
+  };
 
-  async function showTodo() {
-    const models = await DataStore.query(Todo);
-    console.log(models);
-  }
-
-  async function updateTodo() {
-    const original = await DataStore.query(Todo, '2e737f68-e5b2-4cc3-9999-419d4225c60a');
-    /* Models in DataStore are immutable. To update a record you must use the copyOf function
-    to apply updates to the item’s fields rather than mutating the instance directly */
-    await DataStore.save(
-      Todo.copyOf(original, (item) => {
-        item.name = `updated ${Date.now()}`;
-      })
-    );
-  }
-
-  async function deleteTodo() {
-    const modelToDelete = await DataStore.query(Todo, '2e737f68-e5b2-4cc3-9999-419d4225c60a');
-    DataStore.delete(modelToDelete);
-  }
+  useEffect(() => {
+    fetchToDo();
+  }, []);
 
   return (
     <div className="App">
-      <div className="App-main">
-        <button onClick={addTodo}>Create</button>
-        <button onClick={showTodo}>Show</button>
-        <button onClick={updateTodo}>Update</button>
-        <button onClick={deleteTodo}>Delete</button>
+      <NavBar />
+      <div className="AppContent">
+        {renderToDoList()}
+        <p>{toDoItemToUpdate ? 'Update' : 'Create'} To Do item:</p>
+        <div className="App__ToDoForm">
+          {toDoItemToUpdate ? (
+            <ToDoUpdateForm
+              className="ToDoUpdateForm"
+              onSubmit={handleToDoUpdateFormSubmit}
+              onCancel={() => setToDoItemToUpdate('')}
+            />
+          ) : (
+            <ToDoCreateForm className="ToDoCreateForm" onSubmit={handleToDoFormSubmit} />
+          )}
+        </div>
       </div>
     </div>
   );
