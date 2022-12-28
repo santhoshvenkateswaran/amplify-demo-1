@@ -2,7 +2,7 @@ import { DataStore } from '@aws-amplify/datastore';
 import { useEffect, useState } from 'react';
 import './App.css';
 import { ToDo } from './models';
-import { NavBar, ToDoCreateForm, ToDoUpdateForm } from './ui-components';
+import { NavBar, ToDoCreateForm, ToDoUpdateForm, ToDoCard } from './ui-components';
 
 function App() {
   const [toDoList, setToDoList] = useState([]);
@@ -57,6 +57,7 @@ function App() {
 
   const handleToDoUpdateFormSubmit = ({ title, description }) => {
     updateToDo(title, description).then(() => {
+      setToDoItemToUpdate('');
       fetchToDo();
     });
   };
@@ -71,29 +72,28 @@ function App() {
     }
 
     return (
-      <>
-        <table className="App__ToDoList">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {toDoList.map((toDoItem) => (
-              <tr className="App__ToDoItem" key={toDoItem.id}>
-                <td>{toDoItem.title}</td>
-                <td>{toDoItem.description}</td>
-                <td>
-                  <button onClick={() => handleToDoEditClick(toDoItem.id)}>Edit</button>
-                  <button onClick={() => handleToDoDeleteClick(toDoItem.id)}>Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </>
+      <div className="App__card-container">
+        {toDoList.map((toDoItem) =>
+          toDoItemToUpdate && toDoItem.id === toDoItemToUpdate ? (
+            <ToDoUpdateForm
+              className="ToDoUpdateForm"
+              toDo={toDoItem}
+              onSubmit={handleToDoUpdateFormSubmit}
+              onCancel={() => setToDoItemToUpdate('')}
+            />
+          ) : (
+            <ToDoCard
+              toDo={toDoItem}
+              key={toDoItem.id}
+              overrides={{
+                ToDoCard: { justifyContent: 'space-between' },
+                Button35512789: { onClick: () => handleToDoEditClick(toDoItem.id) },
+                Button35592883: { onClick: () => handleToDoDeleteClick(toDoItem.id) },
+              }}
+            />
+          )
+        )}
+      </div>
     );
   };
 
@@ -106,17 +106,9 @@ function App() {
       <NavBar />
       <div className="AppContent">
         {renderToDoList()}
-        <p>{toDoItemToUpdate ? 'Update' : 'Create'} To Do item:</p>
+        <p>Create To Do item:</p>
         <div className="App__ToDoForm">
-          {toDoItemToUpdate ? (
-            <ToDoUpdateForm
-              className="ToDoUpdateForm"
-              onSubmit={handleToDoUpdateFormSubmit}
-              onCancel={() => setToDoItemToUpdate('')}
-            />
-          ) : (
-            <ToDoCreateForm className="ToDoCreateForm" onSubmit={handleToDoFormSubmit} />
-          )}
+          <ToDoCreateForm className="ToDoCreateForm" onSubmit={handleToDoFormSubmit} />
         </div>
       </div>
     </div>

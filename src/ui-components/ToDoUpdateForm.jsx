@@ -9,7 +9,7 @@ import * as React from "react";
 import { fetchByPath, validateField } from "./utils";
 import { ToDo } from "../models";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
+import { Button, Flex, Grid, TextField, useTheme } from "@aws-amplify/ui-react";
 import { DataStore } from "aws-amplify";
 export default function ToDoUpdateForm(props) {
   const {
@@ -24,6 +24,7 @@ export default function ToDoUpdateForm(props) {
     overrides,
     ...rest
   } = props;
+  const { tokens } = useTheme();
   const initialValues = {
     title: undefined,
     description: undefined,
@@ -64,9 +65,9 @@ export default function ToDoUpdateForm(props) {
   return (
     <Grid
       as="form"
-      rowGap="15px"
-      columnGap="15px"
-      padding="20px"
+      rowGap={tokens.space.medium.value}
+      columnGap={tokens.space.medium.value}
+      padding={tokens.space.medium.value}
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
@@ -167,14 +168,8 @@ export default function ToDoUpdateForm(props) {
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
       >
-        <Button
-          children="Reset"
-          type="reset"
-          onClick={resetStateValues}
-          {...getOverrideProps(overrides, "ResetButton")}
-        ></Button>
         <Flex
-          gap="15px"
+          gap={tokens.space.medium.value}
           {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
         >
           <Button
@@ -186,7 +181,7 @@ export default function ToDoUpdateForm(props) {
             {...getOverrideProps(overrides, "CancelButton")}
           ></Button>
           <Button
-            children="Submit"
+            children="Save"
             type="submit"
             variation="primary"
             isDisabled={Object.values(errors).some((e) => e?.hasError)}

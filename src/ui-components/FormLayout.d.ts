@@ -5,12 +5,11 @@
  **************************************************************************/
 
 import * as React from "react";
-import { ToDo } from "../models";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { FlexProps } from "@aws-amplify/ui-react";
-export declare type ActionCardProps = React.PropsWithChildren<Partial<FlexProps> & {
-    toDo?: ToDo;
+export declare type FormLayoutProps = React.PropsWithChildren<Partial<FlexProps> & {
+    type?: "create" | "update";
 } & {
     overrides?: EscapeHatchProps | undefined | null;
 }>;
-export default function ActionCard(props: ActionCardProps): React.ReactElement;
+export default function FormLayout(props: FormLayoutProps): React.ReactElement;

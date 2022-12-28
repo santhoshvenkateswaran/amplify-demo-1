@@ -9,7 +9,14 @@ import * as React from "react";
 import { fetchByPath, validateField } from "./utils";
 import { ToDo } from "../models";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
+import {
+  Button,
+  Flex,
+  Grid,
+  TextAreaField,
+  TextField,
+  useTheme,
+} from "@aws-amplify/ui-react";
 import { DataStore } from "aws-amplify";
 export default function ToDoCreateForm(props) {
   const {
@@ -23,6 +30,7 @@ export default function ToDoCreateForm(props) {
     overrides,
     ...rest
   } = props;
+  const { tokens } = useTheme();
   const initialValues = {
     title: undefined,
     description: undefined,
@@ -53,9 +61,9 @@ export default function ToDoCreateForm(props) {
   return (
     <Grid
       as="form"
-      rowGap="15px"
-      columnGap="15px"
-      padding="20px"
+      rowGap={tokens.space.medium.value}
+      columnGap={tokens.space.medium.value}
+      padding={tokens.space.medium.value}
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
@@ -105,6 +113,7 @@ export default function ToDoCreateForm(props) {
         label="Title"
         isRequired={true}
         isReadOnly={false}
+        placeholder="Enter Title"
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
@@ -125,10 +134,12 @@ export default function ToDoCreateForm(props) {
         hasError={errors.title?.hasError}
         {...getOverrideProps(overrides, "title")}
       ></TextField>
-      <TextField
+      <TextAreaField
         label="Description"
+        descriptiveText=""
         isRequired={true}
         isReadOnly={false}
+        placeholder="Enter Description"
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
@@ -148,19 +159,13 @@ export default function ToDoCreateForm(props) {
         errorMessage={errors.description?.errorMessage}
         hasError={errors.description?.hasError}
         {...getOverrideProps(overrides, "description")}
-      ></TextField>
+      ></TextAreaField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
       >
-        <Button
-          children="Clear"
-          type="reset"
-          onClick={resetStateValues}
-          {...getOverrideProps(overrides, "ClearButton")}
-        ></Button>
         <Flex
-          gap="15px"
+          gap={tokens.space.medium.value}
           {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
         >
           <Button
@@ -172,7 +177,7 @@ export default function ToDoCreateForm(props) {
             {...getOverrideProps(overrides, "CancelButton")}
           ></Button>
           <Button
-            children="Submit"
+            children="Create"
             type="submit"
             variation="primary"
             isDisabled={Object.values(errors).some((e) => e?.hasError)}

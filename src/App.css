@@ -16,6 +16,12 @@
   text-align: left;
 }
 
+.App__card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
 .App__ToDoItem button:first-child {
   margin-right: 1rem;
 }
