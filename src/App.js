@@ -129,7 +129,7 @@ function App() {
   return (
     <div className="App">
       {showAddForm && renderCreateFormModal()}
-      <Header width={'100%'} />
+      <Header className="App__Header" width={'100%'} />
       {renderToDoList()}
       <div className="App_AddButton">
         <AddButton overrides={{ AddButton: { onClick: () => setShowAddForm(true) } }} />

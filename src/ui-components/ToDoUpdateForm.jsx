@@ -9,7 +9,14 @@ import * as React from "react";
 import { fetchByPath, validateField } from "./utils";
 import { ToDo } from "../models";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Button, Flex, Grid, TextField, useTheme } from "@aws-amplify/ui-react";
+import {
+  Button,
+  Flex,
+  Grid,
+  TextAreaField,
+  TextField,
+  useTheme,
+} from "@aws-amplify/ui-react";
 import { DataStore } from "aws-amplify";
 export default function ToDoUpdateForm(props) {
   const {
@@ -139,7 +146,7 @@ export default function ToDoUpdateForm(props) {
         hasError={errors.title?.hasError}
         {...getOverrideProps(overrides, "title")}
       ></TextField>
-      <TextField
+      <TextAreaField
         label="Description"
         isRequired={true}
         isReadOnly={false}
@@ -163,7 +170,7 @@ export default function ToDoUpdateForm(props) {
         errorMessage={errors.description?.errorMessage}
         hasError={errors.description?.hasError}
         {...getOverrideProps(overrides, "description")}
-      ></TextField>
+      ></TextAreaField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

@@ -5,6 +5,10 @@
   background-color: #f6f6f6;
 }
 
+.App__Header {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .AppContent {
   display: flex;
   flex-direction: column;

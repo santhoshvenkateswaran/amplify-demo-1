@@ -7,7 +7,7 @@
 import * as React from "react";
 import { ToDo } from "../models";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, TextAreaFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 export declare type ValidationResponse = {
     hasError: boolean;
     errorMessage?: string;
@@ -25,7 +25,7 @@ export declare type FormProps<T> = Partial<T> & React.DOMAttributes<HTMLDivEleme
 export declare type ToDoUpdateFormOverridesProps = {
     ToDoUpdateFormGrid?: FormProps<GridProps>;
     title?: FormProps<TextFieldProps>;
-    description?: FormProps<TextFieldProps>;
+    description?: FormProps<TextAreaFieldProps>;
 } & EscapeHatchProps;
 export declare type ToDoUpdateFormProps = React.PropsWithChildren<{
     overrides?: ToDoUpdateFormOverridesProps | undefined | null;
