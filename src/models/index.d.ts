@@ -6,6 +6,36 @@ import { LazyLoading, LazyLoadingDisabled } from "@aws-amplify/datastore";
 
 
 
+type EagerEmpGrowth = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<EmpGrowth, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name?: string | null;
+  readonly data?: (number | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyEmpGrowth = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<EmpGrowth, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name?: string | null;
+  readonly data?: (number | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type EmpGrowth = LazyLoading extends LazyLoadingDisabled ? EagerEmpGrowth : LazyEmpGrowth
+
+export declare const EmpGrowth: (new (init: ModelInit<EmpGrowth>) => EmpGrowth) & {
+  copyOf(source: EmpGrowth, mutator: (draft: MutableModel<EmpGrowth>) => MutableModel<EmpGrowth> | void): EmpGrowth;
+}
+
 type EagerToDo = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<ToDo, 'id'>;

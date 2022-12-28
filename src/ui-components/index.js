@@ -41,4 +41,6 @@ export { default as studioTheme } from "./studioTheme";
 export { default as PersonCreateForm } from "./PersonCreateForm";
 export { default as ToDoUpdateForm } from "./ToDoUpdateForm";
 export { default as ToDoCreateForm } from "./ToDoCreateForm";
+export { default as EmpGrowthCreateForm } from "./EmpGrowthCreateForm";
+export { default as EmpGrowthUpdateForm } from "./EmpGrowthUpdateForm";
 export { default as PersonUpdateForm } from "./PersonUpdateForm";

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import Dashboard from './pages/Dashboard';
-import { Home } from './pages/Home';
+import Home from './pages/Home';
 import { Header } from './ui-components';
 
 function App() {

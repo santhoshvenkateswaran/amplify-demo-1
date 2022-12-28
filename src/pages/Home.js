@@ -4,7 +4,7 @@ import { ToDo } from '../models';
 import { AddButton, ToDoCard, ToDoCreateForm, ToDoUpdateForm } from '../ui-components';
 import './Home.css';
 
-export const Home = () => {
+const Home = () => {
   const [toDoList, setToDoList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [toDoItemToUpdate, setToDoItemToUpdate] = useState('');
@@ -136,3 +136,5 @@ export const Home = () => {
     </>
   );
 };
+
+export default Home;
