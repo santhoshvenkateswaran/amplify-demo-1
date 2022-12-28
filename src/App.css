@@ -8,3 +8,17 @@
 .App__Header {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+.Header__MenuItem {
+  border-bottom: 1px solid transparent;
+  cursor: default;
+}
+
+.Header__MenuItem:not(.Header__MenuItem-active):hover {
+  border-bottom: 1px solid gray;
+  cursor: pointer;
+}
+
+.Header__MenuItem-active {
+  color: #047d95 !important;
+}

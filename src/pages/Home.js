@@ -96,7 +96,7 @@ export const Home = () => {
     }
 
     return (
-      <div className="Home__card-container">
+      <div className="Home__Cards">
         {toDoList.map((toDoItem) =>
           toDoItemToUpdate && toDoItem.id === toDoItemToUpdate ? (
             <ToDoUpdateForm

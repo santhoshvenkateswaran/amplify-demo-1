@@ -1,9 +1,10 @@
-.Home__card-container {
+.Home__Cards {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   background-color: #f6f6f6;
-  padding: 1.5rem;
+  padding: 0.5rem;
+  margin: 1rem;
   overflow-y: auto;
 }
 
