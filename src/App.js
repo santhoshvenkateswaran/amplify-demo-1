@@ -2,12 +2,13 @@ import { DataStore } from '@aws-amplify/datastore';
 import { useEffect, useState } from 'react';
 import './App.css';
 import { ToDo } from './models';
-import { NavBar, ToDoCreateForm, ToDoUpdateForm, ToDoCard } from './ui-components';
+import { AddButton, Header, ToDoCard, ToDoCreateForm, ToDoUpdateForm } from './ui-components';
 
 function App() {
   const [toDoList, setToDoList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [toDoItemToUpdate, setToDoItemToUpdate] = useState('');
+  const [showAddForm, setShowAddForm] = useState(false);
 
   const createToDo = (title, description) => DataStore.save(new ToDo({ title, description }));
 
@@ -51,6 +52,7 @@ function App() {
 
   const handleToDoFormSubmit = ({ title, description }) => {
     createToDo(title, description).then(() => {
+      setShowAddForm(false);
       fetchToDo();
     });
   };
@@ -62,13 +64,35 @@ function App() {
     });
   };
 
+  const renderCreateFormModal = () => {
+    return (
+      <div className="CreateForm__ModalBackdrop" onClick={() => setShowAddForm(false)}>
+        <div className="CreateForm__ModalContent" onClick={(e) => e.stopPropagation()}>
+          <ToDoCreateForm
+            className="App__Form CreateForm"
+            onSubmit={handleToDoFormSubmit}
+            onCancel={() => setShowAddForm(false)}
+          />
+        </div>
+      </div>
+    );
+  };
+
   const renderToDoList = () => {
     if (loading) {
-      return <p>Fetching your To Do list...</p>;
+      return (
+        <div className="App__Message">
+          <p>Fetching your notes...</p>
+        </div>
+      );
     }
 
     if (!toDoList?.length) {
-      return <p>Yay! You're all caught up.</p>;
+      return (
+        <div className="App__Message">
+          <p>Notes you add appear here.</p>
+        </div>
+      );
     }
 
     return (
@@ -76,8 +100,9 @@ function App() {
         {toDoList.map((toDoItem) =>
           toDoItemToUpdate && toDoItem.id === toDoItemToUpdate ? (
             <ToDoUpdateForm
-              className="ToDoUpdateForm"
+              className="App__Form"
               toDo={toDoItem}
+              key={toDoItem.id}
               onSubmit={handleToDoUpdateFormSubmit}
               onCancel={() => setToDoItemToUpdate('')}
             />
@@ -103,13 +128,11 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar />
-      <div className="AppContent">
-        {renderToDoList()}
-        <p>Create To Do item:</p>
-        <div className="App__ToDoForm">
-          <ToDoCreateForm className="ToDoCreateForm" onSubmit={handleToDoFormSubmit} />
-        </div>
+      {showAddForm && renderCreateFormModal()}
+      <Header width={'100%'} />
+      {renderToDoList()}
+      <div className="App_AddButton">
+        <AddButton overrides={{ AddButton: { onClick: () => setShowAddForm(true) } }} />
       </div>
     </div>
   );
