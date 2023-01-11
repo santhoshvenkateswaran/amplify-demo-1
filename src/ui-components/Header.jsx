@@ -7,7 +7,7 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Flex, Text, View } from "@aws-amplify/ui-react";
+import { Flex, Icon, Text } from "@aws-amplify/ui-react";
 export default function Header(props) {
   const { overrides, ...rest } = props;
   return (
@@ -19,7 +19,9 @@ export default function Header(props) {
       justifyContent="flex-start"
       alignItems="center"
       position="relative"
-      padding="24px 32px 24px 32px"
+      border="1px SOLID rgba(222,220,222,1)"
+      boxShadow="0px 2px 16px rgba(0, 0, 0, 0.10000000149011612)"
+      padding="23px 31px 23px 31px"
       backgroundColor="rgba(255,255,255,1)"
       {...rest}
       {...getOverrideProps(overrides, "Header")}
@@ -37,124 +39,55 @@ export default function Header(props) {
         padding="0px 0px 0px 0px"
         {...getOverrideProps(overrides, "Logo")}
       >
-        <View
+        <Icon
           width="16px"
           height="18px"
+          viewBox={{ minX: 0, minY: 0, width: 16, height: 18 }}
+          paths={[
+            {
+              d: "M0 5C0 3.89543 0.895431 3 2 3L14 3C15.1046 3 16 3.89543 16 5L16 16C16 17.1046 15.1046 18 14 18L2 18C0.895431 18 0 17.1046 0 16L0 5Z",
+              fill: "rgba(255,255,255,1)",
+              fillRule: "nonzero",
+            },
+            {
+              d: "M2 1C2 0.447715 2.44772 0 3 0C3.55228 0 4 0.447715 4 1L4 3L2 3L2 1Z",
+              fill: "rgba(255,255,255,1)",
+              fillRule: "nonzero",
+            },
+            {
+              d: "M7 1C7 0.447715 7.44772 0 8 0C8.55228 0 9 0.447715 9 1L9 3L7 3L7 1Z",
+              fill: "rgba(255,255,255,1)",
+              fillRule: "nonzero",
+            },
+            {
+              d: "M12 1C12 0.447715 12.4477 0 13 0C13.5523 0 14 0.447715 14 1L14 3L12 3L12 1Z",
+              fill: "rgba(255,255,255,1)",
+              fillRule: "nonzero",
+            },
+            {
+              d: "M2 8C2 7.44772 2.44772 7 3 7L8 7C8.55228 7 9 7.44772 9 8C9 8.55228 8.55228 9 8 9L3 9C2.44772 9 2 8.55228 2 8Z",
+              fill: "rgba(255,255,255,1)",
+              fillRule: "nonzero",
+            },
+            {
+              d: "M2 11C2 10.4477 2.44772 10 3 10L13 10C13.5523 10 14 10.4477 14 11C14 11.5523 13.5523 12 13 12L3 12C2.44772 12 2 11.5523 2 11Z",
+              fill: "rgba(255,255,255,1)",
+              fillRule: "nonzero",
+            },
+            {
+              d: "M2 14C2 13.4477 2.44772 13 3 13L13 13C13.5523 13 14 13.4477 14 14C14 14.5523 13.5523 15 13 15L3 15C2.44772 15 2 14.5523 2 14Z",
+              fill: "rgba(255,255,255,1)",
+              fillRule: "nonzero",
+            },
+          ]}
           display="block"
           gap="unset"
           alignItems="unset"
           justifyContent="unset"
           shrink="0"
           position="relative"
-          padding="0px 0px 0px 0px"
-          {...getOverrideProps(overrides, "IconNote")}
-        >
-          <View
-            width="16px"
-            height="15px"
-            display="block"
-            gap="unset"
-            alignItems="unset"
-            justifyContent="unset"
-            position="absolute"
-            top="3px"
-            left="0px"
-            borderRadius="2px"
-            padding="0px 0px 0px 0px"
-            backgroundColor="rgba(20,155,252,1)"
-            {...getOverrideProps(overrides, "paper")}
-          ></View>
-          <View
-            width="2px"
-            height="3px"
-            display="block"
-            gap="unset"
-            alignItems="unset"
-            justifyContent="unset"
-            position="absolute"
-            top="0px"
-            left="2px"
-            borderRadius="1px 1px 0px 0px"
-            padding="0px 0px 0px 0px"
-            backgroundColor="rgba(20,155,252,1)"
-            {...getOverrideProps(overrides, "clip1")}
-          ></View>
-          <View
-            width="2px"
-            height="3px"
-            display="block"
-            gap="unset"
-            alignItems="unset"
-            justifyContent="unset"
-            position="absolute"
-            top="0px"
-            left="7px"
-            borderRadius="1px 1px 0px 0px"
-            padding="0px 0px 0px 0px"
-            backgroundColor="rgba(20,155,252,1)"
-            {...getOverrideProps(overrides, "clip2")}
-          ></View>
-          <View
-            width="2px"
-            height="3px"
-            display="block"
-            gap="unset"
-            alignItems="unset"
-            justifyContent="unset"
-            position="absolute"
-            top="0px"
-            left="12px"
-            borderRadius="1px 1px 0px 0px"
-            padding="0px 0px 0px 0px"
-            backgroundColor="rgba(20,155,252,1)"
-            {...getOverrideProps(overrides, "clip3")}
-          ></View>
-          <View
-            width="7px"
-            height="2px"
-            display="block"
-            gap="unset"
-            alignItems="unset"
-            justifyContent="unset"
-            position="absolute"
-            top="7px"
-            left="2px"
-            borderRadius="2px"
-            padding="0px 0px 0px 0px"
-            backgroundColor="rgba(255,255,255,1)"
-            {...getOverrideProps(overrides, "line1")}
-          ></View>
-          <View
-            width="12px"
-            height="2px"
-            display="block"
-            gap="unset"
-            alignItems="unset"
-            justifyContent="unset"
-            position="absolute"
-            top="10px"
-            left="2px"
-            borderRadius="2px"
-            padding="0px 0px 0px 0px"
-            backgroundColor="rgba(255,255,255,1)"
-            {...getOverrideProps(overrides, "line2")}
-          ></View>
-          <View
-            width="12px"
-            height="2px"
-            display="block"
-            gap="unset"
-            alignItems="unset"
-            justifyContent="unset"
-            position="absolute"
-            top="13px"
-            left="2px"
-            borderRadius="2px"
-            padding="0px 0px 0px 0px"
-            backgroundColor="rgba(255,255,255,1)"
-            {...getOverrideProps(overrides, "line3")}
-          ></View>
-        </View>
+          {...getOverrideProps(overrides, "NoteIcon")}
+        ></Icon>
         <Text
           fontFamily="Inter"
           fontSize="20px"

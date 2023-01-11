@@ -83,7 +83,7 @@ export default function ActionCard(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children={toDo?.title}
+            children="Classic Long Sleeve T-Shirt"
             {...getOverrideProps(overrides, "Classic Long Sleeve T-Shirt")}
           ></Text>
           <Text
@@ -106,7 +106,7 @@ export default function ActionCard(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children={toDo?.description}
+            children="Information about this product"
             {...getOverrideProps(overrides, "Information about this product")}
           ></Text>
         </Flex>

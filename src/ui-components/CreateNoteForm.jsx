@@ -34,9 +34,10 @@ export default function CreateNoteForm(props) {
       justifyContent="flex-start"
       alignItems="flex-start"
       position="relative"
+      border="1px SOLID rgba(222,220,222,1)"
       boxShadow="2px 2px 8px rgba(0, 0, 0, 0.10000000149011612)"
       borderRadius="8px"
-      padding="16px 16px 16px 16px"
+      padding="15px 15px 15px 15px"
       backgroundColor="rgba(255,255,255,1)"
       as="form"
       {...rest}
